@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<!-- <body background="../static/img/bg.jpg"> -->
+<body>
+    <div class="container-fluid">
+        <!-- This is the header section -->
+        <div class="row header">
+            <div class="col-8">
+                <h1>About Us</h1>
+            </div>
+            <div class="col-4">
+                <ul class="nav justtify-content-end">
+                    <li class="nav-item vertical-line">
+                        <a class="nav-link" href="{{ url_for('index') }}">Market Insights</a>
+                    </li>
+                    <li class="nav-item vertical-line">
+                        <a class="nav-link active" href="{{ url_for('aboutus') }}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('api') }}">API Doc</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <section>
+            <h5>Our Team</hr></h5>
+            <p>Formed at UCBX during completion of a data analytics and visualization program,
+               a team consisting of four people created this stock market analysis app in two weeks.
+               Tasked with bringing an original idea to fruition together, we chose to create a tool
+               that facilitates stock market analysis.
+            </p>
+            <p>
+               To learn more about the team members, please use the links below:
+            </p>
+            <ul>
+                <a href="https://www.linkedin.com/in/oblockton/" target="_blank">Omari Blockton</a><br>
+                <a href="https://www.linkedin.com/in/stephen-griggs-b2aaaa132/" target="_blank">Stevie Griggs</a><br>
+                <a href="https://www.linkedin.com/in/nicholasmccarty/" target="_blank">Nicholas McCarty</a><br>
+                <a href="https://www.linkedin.com/in/pamzhao/" target="_blank">Pam Zhao</a>
+            </ul>
+        </section>
+
+        <section>
+            <h5>Our App</h5>
+            <p>When trading equities, it is common to perform three types of analysis: technical, fundamental, and sentiment.
+               Our goal is to help simplify this process. Our approach? Serving interactive analytics as a dashboard,
+               thereby allowing the user to see the following in real time:
+            </p>
+            <ul>
+                <li>Closing price for a user-selected stock (100 M5 data points), plotted along with trading volume and a 20-period moving average,</li>
+                <li>Recent news headlines for the user-selected stock, and</li>
+                <li>Current macroeconomic events.</li>
+            </ul>
+            <p>For more information, please review our <a href="https://docs.google.com/document/d/11zVICu8kPYhLeLr4h9Sz93ctkNKFr72TYJkGM7yyT9Y/edit#" target="_blank">scope of work</a>.</p>
+        </section>
+
+        <section>
+            <h5>Our Suggested Usage</h5>
+            <p>Select a stock ticker symbol from the dropdown menu and peruse at your leisure the price action, stock news, and economic calendar--it's as easy as that!
+            </p>
+        </section>
+
+        <!-- This is th footer section -->
+        <footer>
+            <p>By: Omari Blockton, Stevie Griggs, Nicholas McCarty, and Pam Zhao</p>
+        </footer>
+    </div>
+</body>
+</html>

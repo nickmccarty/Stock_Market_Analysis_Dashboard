@@ -1,0 +1,15 @@
+news response  outermost keys/column names
+id
+publishDate
+discoveryDate
+title
+language
+text
+structuredText
+url
+elements
+website
+metadata
+readTime
+highlight
+score

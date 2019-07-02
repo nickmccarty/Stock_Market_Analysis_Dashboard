@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API Doc</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- This is the header section -->
+        <div class="row header">
+            <div class="col-8">
+                <h1>API Doc</h1>
+            </div>
+            <div class="col-4">
+                <ul class="nav justtify-content-end">
+                    <li class="nav-item vertical-line">
+                        <a class="nav-link" href="{{ url_for('index') }}">Market Insights</a>
+                    </li>
+                    <li class="nav-item vertical-line">
+                        <a class="nav-link" href="{{ url_for('aboutus') }}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('api') }}">API Doc</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <section>
+            <h2>API Documentation</h2>
+            <br>
+            <h3>Overview</h3>
+            <p> The data used to build our tables and plots presented on the <a rel="noopener noreferrer" class="" href="{{ url_for('index') }}" target="_blank">Market Insights</a> page is available for capture and use through our API endpoints.</p>
+            <p>Our data is extracted from a collection of well known industry sources. In an effort to provide current up to date information, our data is collected using a combination of RESTful API
+              requests to external sources, and web scraping functions. We have provided this data openly, without the necessity of registering an api key or imposing rate limits on users.
+              In an effort to keep the data channels open, please limit cycling of different NASDAQ stocks and API endpoint requests to no more than 5 requet per minute.</p>
+            <p>Each available endpoint is described below, including information on the original datasources.</p>
+            <ul>
+              <h3>Endpoints: </h3>
+              <li>
+                <h4>baseURL/tickpicks</h4>
+                <p>Provides a JSON list of all the NASDAQ symbol options available for data visualization. This list will include the complete NASDAQ index of companies. This list has been sourced from
+                <a rel="noopener noreferrer" class="" href="http://eoddata.com/symbols.aspx" target="_blank">EOD Data Symbols List</a>
+                </p>
+              </li>
+              <br>
+              <li>
+                <h4>baseURL/newstable/symbol</h4>
+                <p> Provides a JSON list of the articles displayed in the news table section, using a NASDAQ ticker symbol as input. Please replace 'symbol' with the ticker symbol of a specific company.
+                This data has been sourced from <a rel="noopener noreferrer" class="" href="https://api.newsriver.io" target="_blank">NewsRiver.io</a>, a free data source for current
+                and historical financial news.</p>
+                <p> Example Usge: baseURL/newstable/AAPL | Will return a JSON response of all articles pertaining to AAPL(Apple, Inc.) news.</p>
+              </li>
+              <br>
+              <li>
+                <h4>baseURL/stockpull/symbol</h4>
+                <p> Provides a JSON response containing the closing price, and volume data used to build the short term time series plot. The data consist of ~1168 data points, at 5 minute intervals.
+                  A NASDAQ ticker symbol is given as an input to return only that data which corresponds to the ticker symbol input. This data has been sourced from
+                  <a rel="noopener noreferrer" class="" href="https://www.alphavantage.co" target="_blank">AlphaVantage</a>
+                  , which offers real-time stock quotes, OTC (Over-The-Counter) Products, and ETFs (Exchange Traded Funds) in daily, weekly, monthly data as RESTful API JSON responses and CSV download .</p>
+                <p>Example Usage: baseURL/stockpull/AAPL | Will return closing price, and volume for AAPL(Apple, Inc.) stock, at 5min intervals- spanning 1168, 5min intervals from the present date.</p>
+              </li>
+              <br>
+              <li>
+                <h4>baseURL/stockhistory/symbol</h4>
+                <p> Provides a JSON response containing the closing price data used to build the Long-Term time series plot. This data consist of ~257 data points, at monthly intervals.
+                  A NASDAQ symbol is given as an input to return only that data which corresponds to the ticker symbols input. This data has been sourced from
+                  <a rel="noopener noreferrer" class="" href="https://www.alphavantage.co" target="_blank">AlphaVantage</a>
+                  , which offers real-time stock quotes, OTC (Over-The-Counter) Products, and ETFs (Exchange Traded Funds) in daily, weekly, monthly data as RESTful API JSON responses and CSV download .</p>
+                <p>Example Usage: baseURL/stockpull/AAPL | Will return closing price, and volume for AAPL(Apple, Inc.) stock, at monthly intervals- spanning ~257, monthly intervals from the present date.</p>
+              </li>
+              <br>
+              <li>
+                <h4>baseURL/marketstats/tableinput</h4>
+                <p> Provides a JSON response of data used to build the market overview section within the <a rel="noopener noreferrer" class="" href="{{ url_for('index') }}" target="_blank">Market Insights</a> page(bottom right corner).
+                This endpoint takes in a table selection as an input and return the data for the specified table. This data has been sourced from <a rel="noopener noreferrer" class="" href="https://www.nasdaq.com/markets/most-active.aspx" target="_blank">Nasdaq.com</a>
+                , the official website of The Nasdaq Stock Market.</p>
+                <h5> Example Usage and available table inputs: </h5>
+                  <ul>
+                    <li>baseURL/marketstats/mostactivebyvol |<p> Provides data used to build the "Most Active by Share Volume" table. </p> </li>
+                    <li>baseURL/marketstats/mostdeclined | <p> Provides data used to build the  "Most Declined" table. </p> </li>
+                    <li>baseURL/marketstats/mostactivebydollarvol | <p> Provides data used to build the "Most Active by Dollar Volume" table</p> </li>
+                  </ul>
+              </li>
+              <br>
+              <li>
+                <h4>baseURL/econcal/dateinput</h4>
+                <p>Provides a JSON response of the data used to build the Economic Calendar. This endpoint takes in a date input and returns all Economic Events occuring on the specified date input.
+                The date input MUST follow the format of EX: Dec20.2019. It is not case sensitive, however and abbreviated month input must be used. Alternatively, to query for the present date, you may pass the string 'today' as a valid input:
+                'Tomorrow' or 'yesterday' are NOT valid inputs.</p>
+                <p> The data for our Economic Calendar is sourced from <a rel="noopener noreferrer" class="" href="https://www.forexfactory.com/calendar.php" target="_blank">ForexFactory.com</a></p>
+                <h5>Example Usage of and valid inputs</h5>
+                  <ul>
+                    <li>baseURL/econcal/today | <p>Provides a JSON response of economic events occuring n the present/current date in which the request was made </p> </li>
+                    <li>baseURL/econcal/Dec20.2019 | <p>Provides a JSON response of economic events occuring on December 20th, 2019</p> </li>
+                  </ul>
+              </li>
+            </ul>
+        </section>
+        <!-- This is th footer section -->
+        <footer>
+            <p>By: Omari Blockton, Stevie Griggs, Nicholas McCarty, and Pam Zhao</p>
+        </footer>
+    </div>
+</body>
+</html>
